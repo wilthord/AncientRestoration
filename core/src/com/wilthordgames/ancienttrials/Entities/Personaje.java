@@ -75,12 +75,12 @@ public class Personaje extends GameObject implements IActor {
         //System.out.println(vel.x);
 
         if (Gdx.input.isKeyPressed(Input.Keys.A) && vel.x > -Constantes.MAXIMA_VELOCIDAD_PERSONAJE) {
-            this.body.setLinearVelocity(vel.x - 0.5f, vel.y);
+            this.body.setLinearVelocity(-1.5f, vel.y);
             //this.body.applyLinearImpulse(-0.40f, 0, body.getWorldCenter().x, body.getWorldCenter().y, true);
         }
 
         if (Gdx.input.isKeyPressed(Input.Keys.D) && vel.x < Constantes.MAXIMA_VELOCIDAD_PERSONAJE) {
-            this.body.setLinearVelocity(vel.x+0.5f, vel.y);
+            this.body.setLinearVelocity(1.5f, vel.y);
             //this.body.applyLinearImpulse(0.40f, 0, pos.x, pos.y, true);
         }
 

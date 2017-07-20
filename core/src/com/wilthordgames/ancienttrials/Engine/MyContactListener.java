@@ -9,6 +9,7 @@ import com.wilthordgames.ancienttrials.Entities.Enemigo;
 import com.wilthordgames.ancienttrials.Entities.GameObject;
 import com.wilthordgames.ancienttrials.Entities.IActor;
 import com.wilthordgames.ancienttrials.Entities.ImpulsoAire;
+import com.wilthordgames.ancienttrials.Entities.Interruptor;
 import com.wilthordgames.ancienttrials.Entities.Personaje;
 import com.wilthordgames.ancienttrials.Entities.Prision;
 import com.wilthordgames.ancienttrials.util.Constantes;
@@ -110,6 +111,17 @@ public class MyContactListener implements ContactListener {
             }
         }
 
+        //DETECTAMOS LAS COLISIONES DEL Interruptor
+        if(objA!= null  && objA instanceof Interruptor){
+            if(calcularColisionInterruptor((Interruptor) objA, objB)){
+                return;
+            }
+        }else if(objB!= null  && objB instanceof Interruptor){
+            if(calcularColisionInterruptor((Interruptor) objB, objA)){
+                return;
+            }
+        }
+
     }
 
     public boolean calcularColisionEnemigo(Enemigo enemigo, Object otro){
@@ -159,6 +171,18 @@ public class MyContactListener implements ContactListener {
             }
         }
         return false;
+    }
+
+    public boolean calcularColisionInterruptor(Interruptor inter, Object otro){
+
+        //if(otro != null ) {
+            //if (otro instanceof String && otro.equals(Constantes.TILEOBJ_PISO)) {
+        if(!inter.activado){
+            inter.activar();
+
+        }
+
+        return true;
     }
 
     @Override

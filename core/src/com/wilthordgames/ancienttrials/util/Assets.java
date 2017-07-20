@@ -32,4 +32,8 @@ public class Assets {
         batch.draw(tex, pos.x, pos.y, tam.x, tam.y);
     }
 
+    public void pintarSprite(SpriteBatch batch, Sprite tex, Vector2 pos, Vector2 tam, float angulo){
+        batch.draw(tex, pos.x, pos.y, tam.x/2, tam.y/2, tam.x, tam.y,1,1, angulo);
+    }
+
 }

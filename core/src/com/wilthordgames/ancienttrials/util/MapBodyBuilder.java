@@ -23,6 +23,10 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.wilthordgames.ancienttrials.Engine.GameState;
 import com.wilthordgames.ancienttrials.Entities.Enemigo;
+import com.wilthordgames.ancienttrials.Entities.ImpulsoAire;
+import com.wilthordgames.ancienttrials.Entities.Interruptor;
+import com.wilthordgames.ancienttrials.Entities.Personaje;
+import com.wilthordgames.ancienttrials.Entities.Plataforma;
 import com.wilthordgames.ancienttrials.Entities.Prision;
 
 /**
@@ -61,6 +65,30 @@ public class MapBodyBuilder {
                         Rectangle rectangle = ((RectangleMapObject)object).getRectangle();
                         GameState.entidades.add(new Prision(new Vector2((rectangle.x + rectangle.width * 0.5f) / ppt, (rectangle.y + rectangle.height * 0.5f ) / ppt),
                                 new Vector2(rectangle.width / ppt, rectangle.height / ppt)));
+                        continue;
+                    }else if (object.getName().trim().equals(Constantes.TILEOBJ_PLAYER)) {
+                        Rectangle rectangle = ((RectangleMapObject)object).getRectangle();
+                        Personaje p = new Personaje(new Vector2((rectangle.x + rectangle.width * 0.5f) / ppt, (rectangle.y + rectangle.height * 0.5f ) / ppt));
+                        GameState.entidades.add(p);
+                        GameState.player = p;
+                        continue;
+                    }else if (object.getName().trim().equals(Constantes.TILEOBJ_INTERRUPTOR)) {
+                        Rectangle rectangle = ((RectangleMapObject)object).getRectangle();
+                        String ObjetoActivar = (String)((RectangleMapObject)object).getProperties().get("id");
+                        GameState.entidades.add(new Interruptor(new Vector2((rectangle.x + rectangle.width * 0.5f) / ppt, (rectangle.y + rectangle.height * 0.5f ) / ppt), ObjetoActivar));
+                        continue;
+                    }else if (object.getName().trim().equals(Constantes.TILEOBJ_PLATAFORMA)) {
+                        Rectangle rectangle = ((RectangleMapObject)object).getRectangle();
+                        String objetoActivar = (String)((RectangleMapObject)object).getProperties().get("id");
+                        Plataforma p = new Plataforma(new Vector2((rectangle.x + rectangle.width * 0.5f) / ppt, (rectangle.y + rectangle.height * 0.5f ) / ppt), new Vector2(rectangle.width / ppt, rectangle.height / ppt), objetoActivar);
+                        GameState.entidades.add(p);
+                        GameState.elementosMoviles.put(objetoActivar, p);
+
+                        continue;
+                    }else if (object.getName().trim().equals(Constantes.TILEOBJ_IMPULSOR)) {
+                        Rectangle rectangle = ((RectangleMapObject)object).getRectangle();
+                        //String ObjetoActivar = (String)((RectangleMapObject)object).getProperties().get("id");
+                        GameState.entidades.add(new ImpulsoAire(new Vector2((rectangle.x + rectangle.width * 0.5f) / ppt, (rectangle.y  ) / ppt), true));
                         continue;
                     }
                 }

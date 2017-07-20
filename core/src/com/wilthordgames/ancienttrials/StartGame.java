@@ -48,7 +48,7 @@ public class StartGame extends ApplicationAdapter {
 		GameState.world.setContactListener(new MyContactListener());
 		debugRenderer = new Box2DDebugRenderer();
 
-		mapa = new TmxMapLoader().load("Terrenos/Nivel01.tmx");
+		mapa = new TmxMapLoader().load("Terrenos/Nivel02.tmx");
 		MapBodyBuilder.buildShapes(mapa, 64, GameState.world);
 		renderer = new OrthogonalTiledMapRenderer(mapa, Constantes.ESCALA_GENERAL);
 		camera = new OrthographicCamera();
@@ -59,8 +59,8 @@ public class StartGame extends ApplicationAdapter {
 		camera.position.y=h*Constantes.ESCALA_GENERAL/2;
 		camera.update();
 
-		GameState.player = new Personaje(new Vector2(328*Constantes.ESCALA_GENERAL, 68*Constantes.ESCALA_GENERAL));
-		GameState.entidades.add(GameState.player);
+		//GameState.player = new Personaje(new Vector2(328*Constantes.ESCALA_GENERAL, 68*Constantes.ESCALA_GENERAL));
+		//GameState.entidades.add(GameState.player);
 
 		inputEngine = new InputEngine();
 		Gdx.input.setInputProcessor(inputEngine);
@@ -145,7 +145,7 @@ public class StartGame extends ApplicationAdapter {
 		GameState.entidadesEliminar.clear();
 
 		for(Vector2 go:GameState.entidadesCrear){
-			GameState.entidades.add(new ImpulsoAire(go));
+			GameState.entidades.add(new ImpulsoAire(go, false));
 		}
 		GameState.entidadesCrear.clear();
 
